@@ -7,23 +7,34 @@ RUN apk add --no-cache \
     curl \
     mysql-client \
     bash \
+    nodejs \
+    npm \
     nginx \
     autoconf \
     g++ \
-    make
-
-# Install Node.js and npm for frontend asset compilation (Vite)
-RUN apk add --no-cache nodejs npm
+    make \
+    # Added dependencies for PHP extensions
+    libxml2-dev \
+    zlib-dev \
+    libjpeg-turbo-dev \
+    libpng-dev \
+    freetype-dev \
+    libwebp-dev \
+    libzip-dev \
+    libcurl
 
 # Install essential PHP extensions for Laravel
-RUN docker-php-ext-install \
+# Note: the `gd` extension requires a configure step to enable image format support
+RUN docker-php-ext-configure gd --with-jpeg --with-freetype --with-webp && \
+    docker-php-ext-install \
     pdo_mysql \
     bcmath \
     curl \
     mbstring \
     gd \
     zip \
-    xml
+    xml \
+    opcache
 
 # Set the working directory inside the container
 WORKDIR /var/www/html
