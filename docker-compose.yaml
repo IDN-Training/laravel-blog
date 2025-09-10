@@ -1,0 +1,12 @@
+services:
+  laravel-blog:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    volumes:
+      - laravel-blog-data:/var/www/html
+
+volumes:
+  laravel-blog-data:
