@@ -54,7 +54,7 @@ RUN echo "\
         location = /robots.txt  { access_log off; log_not_found off; }\n\
         error_page 404 /index.php;\n\
         location ~ \.php$ {\n\
-            fastcgi_pass unix:/run/php/php8.2-fpm.sock;\n\
+            fastcgi_pass unix:/run/php/php8.4-fpm.sock;\n\
             fastcgi_param SCRIPT_FILENAME \$realpath_root\$fastcgi_script_name;\n\
             include fastcgi_params;\n\
         }\n\
@@ -66,7 +66,7 @@ RUN echo "\
 RUN echo "\
     #!/bin/sh\n\
     echo \"Starting services...\"\n\
-    service php8.2-fpm start\n\
+    service php8.4-fpm start\n\
     nginx -g \"daemon off;\" &\n\
     echo \"Ready.\"\n\
     tail -s 1 /var/log/nginx/*.log -f\n\
