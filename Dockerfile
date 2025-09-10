@@ -78,6 +78,8 @@ WORKDIR /var/www/html
 RUN chown -R www-data:www-data /var/www/html
 
 RUN composer install
+RUN npm install
+RUN npm run build
 
 EXPOSE 80
 
