@@ -1,5 +1,7 @@
 services:
   laravel-blog:
+    container_name: app-laravel-blog
+    image: laravel-blog
     build:
       context: .
       dockerfile: Dockerfile
